@@ -124,14 +124,33 @@ if __name__ == "__main__":
     try:
         df_dataset = merge_datasets()
         
-        print("\nDataset Finale Creato:")
-        print(df_dataset.head())
-        print(f"\nDimensioni: {df_dataset.shape}")
+        print("\nDataset Finale Creato (Prima della pulizia NaN):")
+        print(f"Dimensioni: {df_dataset.shape}")
+        
+        # Step 3: Rimuovi righe con NaN
+        df_dataset_clean = df_dataset.dropna()
+        
+        # Step 4: Filtra valori LTPA
+        # Rimuoviamo:
+        # - Valori 0
+        # - Valori frazionari (sia < 1 che > 1)
+        # Manteniamo solo interi positivi.
+        
+        # Filtro per interi (resto della divisione per 1 deve essere 0)
+        # Nota: usiamo una tolleranza minima per float arithmetic se necessario, ma qui % 1 == 0 è standard per check interi
+        df_dataset_clean = df_dataset_clean[df_dataset_clean['LTPA_Weekly_Freq'] % 1 == 0]
+        
+        # Filtro per > 0
+        df_dataset_clean = df_dataset_clean[df_dataset_clean['LTPA_Weekly_Freq'] > 0]
+        
+        print("\nDataset Finale Pulito (Senza NaN, senza 0, solo interi):")
+        print(df_dataset_clean.head())
+        print(f"Dimensioni: {df_dataset_clean.shape}")
         
         # Salvataggio
         output_file = 'Dataset_Diabete_Completo.csv'
-        df_dataset.to_csv(output_file, index=False)
-        print(f"\nDataset completo salvato in: {output_file}")
+        df_dataset_clean.to_csv(output_file, index=False)
+        print(f"\nDataset completo e pulito salvato in: {output_file}")
         
     except Exception as e:
         print(f"\nErrore durante la creazione del dataset: {e}")
