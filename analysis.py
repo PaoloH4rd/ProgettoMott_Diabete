@@ -8,8 +8,9 @@ def run_analysis():
     # 1. Caricamento dei dati
     print("Caricamento dei file...")
     try:
-        demo = pd.read_csv('DEMO_L.csv')[['SEQN', 'RIDAGEYR', 'RIAGENDR']]
-        bmi = pd.read_csv('Body_Measures(BMI).csv')[['SEQN', 'BMXBMI', 'BMXWAIST']]
+        eta = pd.read_csv('DEMO_L.csv')[['SEQN', 'RIDAGEYR' ]]
+        genere = pd.read_csv('DEMO_L.csv')[['SEQN', 'RIAGENDR']]
+        bmi = pd.read_csv('Body_Measures(BMI).csv')[['SEQN', 'BMXBMI']]
         glucose = pd.read_csv('Glucosio_plasmatico.csv')[['SEQN', 'LBXGLU']]
         insulin = pd.read_csv('insulina.csv')[['SEQN', 'LBXIN']]
         cholesterol = pd.read_csv('Colesterolo_totale.csv')[['SEQN', 'LBXTC']]
@@ -20,7 +21,7 @@ def run_analysis():
 
     # 2. Merge dei dataset
     print("Unione dei dataset...")
-    df = hba1c.merge(demo, on='SEQN', how='inner')
+    df = hba1c.merge(eta, on='SEQN', how='inner')
     df = df.merge(bmi, on='SEQN', how='inner')
     df = df.merge(glucose, on='SEQN', how='inner')
     df = df.merge(insulin, on='SEQN', how='inner')
