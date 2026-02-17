@@ -146,11 +146,30 @@ if __name__ == "__main__":
         print("\nDataset Finale Pulito (Senza NaN, senza 0, solo interi):")
         print(df_dataset_clean.head())
         print(f"Dimensioni: {df_dataset_clean.shape}")
-        
-        # Salvataggio
-        output_file = 'Dataset_Diabete_Completo.csv'
-        df_dataset_clean.to_csv(output_file, index=False)
-        print(f"\nDataset completo e pulito salvato in: {output_file}")
+
+        # Step 5: Holdout (Train/Test Split)
+        print("\nCreazione Holdout: 80% Train, 20% Test...")
+
+        # 1. Mischia il dataset
+        df_shuffled = df_dataset_clean.sample(frac=1, random_state=42) # random_state per riproducibilità
+
+        # 2. Dividi in train e test
+        train_size = int(0.8 * len(df_shuffled))
+        train_set = df_shuffled[:train_size]
+        test_set = df_shuffled[train_size:]
+
+        print(f"Dimensioni Train Set: {train_set.shape}")
+        print(f"Dimensioni Test Set: {test_set.shape}")
+
+        # 6. Salvataggio dei nuovi dataset
+        train_output_file = 'train_dataset.csv'
+        test_output_file = 'test_dataset.csv'
+
+        train_set.to_csv(train_output_file, index=False)
+        print(f"Train set salvato in: {train_output_file}")
+
+        test_set.to_csv(test_output_file, index=False)
+        print(f"Test set salvato in: {test_output_file}")
         
     except Exception as e:
         print(f"\nErrore durante la creazione del dataset: {e}")
