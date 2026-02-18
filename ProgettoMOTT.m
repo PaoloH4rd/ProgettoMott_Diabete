@@ -69,7 +69,7 @@ disp(corr_coeff7)
 
 % compreso tra -1 e 1. 
 
-test_data= readmatrix("train_dataset.csv");
+test_data= readmatrix("test_dataset.csv");
 
 Y_gt = test_data(:, 2);  % Assuming the second column corresponds to Glycohemoglobin
 X1_te = test_data(:, 3); % Assuming the third column corresponds to Gender
@@ -97,3 +97,12 @@ rmse = sqrt(mean((Y_gt - predictions).^2));
 disp("Errore quadratico medio (RMSE) delle previsioni:");
 disp(rmse);
 
+% --- R^2 OUT-OF-SAMPLE ---
+
+SS_res = sum((Y_gt - predictions).^2);          % Somma dei residui
+SS_tot = sum((Y_gt - mean(Y_gt)).^2);            % Varianza totale
+
+R2_out = 1 - (SS_res / SS_tot);
+
+disp("R^2 out-of-sample:");
+disp(R2_out);
