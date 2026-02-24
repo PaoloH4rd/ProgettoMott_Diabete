@@ -147,6 +147,14 @@ if __name__ == "__main__":
         print(df_dataset_clean.head())
         print(f"Dimensioni: {df_dataset_clean.shape}")
 
+        # Step 4.5: Salvataggio del dataset completo e pulito
+        output_dir = '../progettoMOTTmatlab'
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        complete_output_path = os.path.join(output_dir, 'Dataset_Diabete_Completo_Pulito.csv')
+        df_dataset_clean.to_csv(complete_output_path, index=False)
+        print(f"\nDataset completo e pulito salvato in: {os.path.abspath(complete_output_path)}")
+
         # Step 5: Holdout (Train/Test Split)
         print("\nCreazione Holdout: 80% Train, 20% Test...")
 
@@ -162,14 +170,24 @@ if __name__ == "__main__":
         print(f"Dimensioni Test Set: {test_set.shape}")
 
         # 6. Salvataggio dei nuovi dataset
-        train_output_file = 'train_dataset.csv'
-        test_output_file = 'test_dataset.csv'
+        # Definiamo la cartella di output per i dati di train/test
+        output_dir = '../progettoMOTTmatlab'
+        
+        # Creiamo la cartella se non esiste
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+            print(f"Cartella di output creata: {os.path.abspath(output_dir)}")
 
-        train_set.to_csv(train_output_file, index=False)
-        print(f"Train set salvato in: {train_output_file}")
+        # Definiamo i percorsi completi per i file
+        train_output_path = os.path.join(output_dir, 'train_dataset.csv')
+        test_output_path = os.path.join(output_dir, 'test_dataset.csv')
 
-        test_set.to_csv(test_output_file, index=False)
-        print(f"Test set salvato in: {test_output_file}")
+        # Salviamo i dataset
+        train_set.to_csv(train_output_path, index=False)
+        print(f"Train set salvato correttamente in: {os.path.abspath(train_output_path)}")
+
+        test_set.to_csv(test_output_path, index=False)
+        print(f"Test set salvato correttamente in: {os.path.abspath(test_output_path)}")
         
     except Exception as e:
         print(f"\nErrore durante la creazione del dataset: {e}")
