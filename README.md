@@ -1,4 +1,4 @@
-# Relazione Tecnica: Analisi Statistica e Predittiva dei Dati sul Diabete
+# Analisi Statistica e Predittiva dei Dati sul Diabete
 **Progetto 8 – Modelli e Metodi di Ottimizzazione Statistica**
 
 ---
