@@ -151,7 +151,7 @@ if __name__ == "__main__":
         output_dir = '../progettoMOTTmatlab'
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
-        complete_output_path = os.path.join(output_dir, 'Dataset_Diabete_Completo_Pulito.csv')
+        complete_output_path = os.path.join(output_dir, 'Dataset_Diabete_Completo.csv')
         df_dataset_clean.to_csv(complete_output_path, index=False)
         print(f"\nDataset completo e pulito salvato in: {os.path.abspath(complete_output_path)}")
 

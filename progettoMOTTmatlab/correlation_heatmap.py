@@ -3,10 +3,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Caricamento dataset
-file_path = '../progettoMOTTmatlab/Dataset_Diabete_Completo_Pulito.csv'
+file_path = 'Dataset_Diabete_Completo.csv'
 df = pd.read_csv(file_path)
 
-# 🔴 Rimuovi SEQN
 df = df.drop(columns=['SEQN'])
 
 # Seleziona solo colonne numeriche
